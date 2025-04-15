@@ -30,6 +30,12 @@ helm upgrade --install --namespace minio --create-namespace minio-tenant minio/t
 
 ### Setup ClickHouse
 
+#### Create Namespace
+
+```bash
+kubectl create namespace monitoring
+```
+
 #### Create custom config
 
 ```bash
