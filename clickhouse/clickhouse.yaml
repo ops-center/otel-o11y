@@ -1,0 +1,25 @@
+apiVersion: kubedb.com/v1alpha2
+kind: ClickHouse
+metadata:
+  name: ch
+  namespace: monitoring
+spec:
+  configSecret:
+    name: my-config-xml
+  version: 24.4.1
+  replicas: 1
+  storage:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 3Gi
+  deletionPolicy: WipeOut
+
+
+
+
+
+
+
+
