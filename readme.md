@@ -30,6 +30,17 @@ helm upgrade --install --namespace minio --create-namespace minio-tenant minio/t
 
 ### Setup ClickHouse
 
+#### Install KubeDB
+
+```bash
+helm install kubedb oci://ghcr.io/appscode-charts/kubedb \
+ --version v2025.3.24 \
+ --namespace kubedb --create-namespace \
+ --set-file global.license= /path/to/the/license.txt \
+ --set global.featureGates.ClickHouse=true \
+ --wait --burst-limit=10000 --debug
+```
+
 #### Create Namespace
 
 ```bash
