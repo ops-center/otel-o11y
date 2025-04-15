@@ -59,7 +59,7 @@ kubectl create secret generic -n monitoring my-config-xml --from-file=./clickhou
 kubectl apply -f ./clickhouse/clickhouse.yaml
 ```
 
-### Verify the Setup
+#### Create Schema
 
 ```bash
 kubectl exec -it -n monitoring ch-0 -- bash
@@ -97,4 +97,40 @@ PARTITION BY toDate(Timestamp)
 ORDER BY (ServiceName, SeverityText, toUnixTimestamp(Timestamp), TraceId)
 TTL toDateTime(Timestamp) + INTERVAL 1 MINUTE TO VOLUME 'cold'
 SETTINGS storage_policy = 'tiered';
+```
+
+
+### Deploy Thanos
+
+#### Create Thanos Storage Secret
+
+```bash
+kubectl -n thanos create secret generic thanos-objstore-config --from-file=thanos-storage-config.yaml=./thanos/s3.yaml
+```
+
+#### Deploy Thanos Components
+```
+kubectl create ns thanos
+kubectl apply -f ./thanos/kube-thanos/manifests/
+
+```
+
+#### Query metrics via Thanos Querier
+
+```bash
+ kubectl port-forward svc/thanos-query -n thanos 9090:9090
+```
+Visit http://localhost:9090 and execute a test query (e.g., up).
+
+### Deploy Opentelmetry Stack
+
+```
+ kubectl apply -f targetallocator-rbac.yaml
+```
+
+```bash
+helm install opentelemetry-kube-stack -n monitoring open-telemetry/opentelemetry-kube-stack \
+--set opentelemetry-operator.admissionWebhooks.certManager.enabled=false \
+--set admissionWebhooks.autoGenerateCert.enabled=true \
+--values=./values.yaml
 ```
