@@ -47,7 +47,7 @@ helm install kubedb oci://ghcr.io/appscode-charts/kubedb \
 kubectl create namespace monitoring
 ```
 
-#### Create custom config
+#### Create Custom Config
 
 ```bash
 kubectl create secret generic -n monitoring my-config-xml --from-file=./clickhouse/custom-config.xml
