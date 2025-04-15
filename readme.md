@@ -108,6 +108,16 @@ SETTINGS storage_policy = 'tiered';
 kubectl create namespace thanos
 ```
 
+#### Deploy Thanos
+
+```bash
+kubectl -n monitoring create secret generic thanos-objstore-config --from-file=objstore.yml=./thanos/s3.yaml
+```
+
+```bash
+helm install thanos bitnami/thanos --namespace monitoring --values=./thanos/values.yaml
+```
+
 #### Create Thanos Storage Secret
 
 ```bash
@@ -123,14 +133,14 @@ kubectl apply -f ./thanos/kube-thanos/manifests/
 #### Query metrics via Thanos Querier
 
 ```bash
- kubectl port-forward svc/thanos-query -n thanos 9090:9090
+kubectl port-forward svc/thanos-query -n thanos 9090:9090
 ```
 Visit http://localhost:9090 and execute a test query (e.g., up).
 
 ### Deploy Opentelmetry Stack
 
 ```
- kubectl apply -f targetallocator-rbac.yaml
+kubectl apply -f targetallocator-rbac.yaml
 ```
 
 ```bash
