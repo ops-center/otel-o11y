@@ -122,7 +122,7 @@ helm install thanos bitnami/thanos --namespace monitoring --values=./thanos/valu
 #### Query metrics via Thanos Querier
 
 ```bash
-kubectl port-forward svc/thanos-query -n thanos 9090:9090
+kubectl port-forward svc/thanos-query -n monitoring 9090:9090
 ```
 Visit http://localhost:9090 and execute a test query (e.g., up).
 
