@@ -1,0 +1,15 @@
+existingObjstoreSecret: thanos-objstore-config
+
+compactor:
+  enabled: true
+
+storegateway:
+  enabled: true
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+receive:
+  enabled: true
+  tsdbRetention: 1m

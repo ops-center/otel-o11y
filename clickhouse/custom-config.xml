@@ -6,7 +6,7 @@
             </local>
             <s3>
                 <type>s3</type>
-                <endpoint>http://minio.minio.svc.cluster.local:80/test/s3_disk/test</endpoint>
+                <endpoint>http://minio.minio.svc.cluster.local:80/test/logs</endpoint>
                 <access_key_id>minio</access_key_id>
                 <secret_access_key>minio123</secret_access_key>
                 <region>us-east-1</region>
@@ -23,7 +23,6 @@
                         <disk>s3</disk>
                     </cold>
                 </volumes>
-                <move_factor>0.2</move_factor>
             </tiered>
         </policies>
     </storage_configuration>
