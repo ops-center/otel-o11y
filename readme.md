@@ -115,6 +115,7 @@ kubectl -n monitoring create secret generic thanos-objstore-config --from-file=o
 ```
 
 ```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install thanos bitnami/thanos --namespace monitoring --values=./thanos/values.yaml
 ```
 
