@@ -118,18 +118,6 @@ kubectl -n monitoring create secret generic thanos-objstore-config --from-file=o
 helm install thanos bitnami/thanos --namespace monitoring --values=./thanos/values.yaml
 ```
 
-#### Create Thanos Storage Secret
-
-```bash
-kubectl -n thanos create secret generic thanos-objstore-config --from-file=thanos-storage-config.yaml=./thanos/s3.yaml
-```
-
-#### Deploy Thanos Components
-```
-kubectl apply -f ./thanos/kube-thanos/manifests/
-
-```
-
 #### Query metrics via Thanos Querier
 
 ```bash
