@@ -116,7 +116,6 @@ kubectl -n thanos create secret generic thanos-objstore-config --from-file=thano
 
 #### Deploy Thanos Components
 ```
-kubectl create ns thanos
 kubectl apply -f ./thanos/kube-thanos/manifests/
 
 ```
