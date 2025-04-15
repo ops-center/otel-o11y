@@ -102,6 +102,12 @@ SETTINGS storage_policy = 'tiered';
 
 ### Deploy Thanos
 
+#### Create Namespace
+
+```bash
+kubectl create namespace thanos
+```
+
 #### Create Thanos Storage Secret
 
 ```bash
