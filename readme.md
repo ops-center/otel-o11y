@@ -33,13 +33,13 @@ helm upgrade --install --namespace minio --create-namespace minio-tenant minio/t
 #### Create custom config
 
 ```bash
-kubectl create secret generic -n monitoring my-config-xml --from-file=./custom-config.xml
+kubectl create secret generic -n monitoring my-config-xml --from-file=./clickhouse/custom-config.xml
 
 ```
 #### Deploy ClickHouse DB
 
 ```bash
-kubectl apply -f ./clickhouse.yaml
+kubectl apply -f ./clickhouse/clickhouse.yaml
 ```
 
 ### Verify the Setup
