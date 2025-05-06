@@ -24,7 +24,12 @@ helm upgrade --install minio-tenant tenant \
   --set tenant.pools[0].servers=1 \
   --set tenant.pools[0].volumesPerServer=1 \
   --set tenant.pools[0].size=1Gi \
-  --set tenant.certificate.requestAutoCert=false \
   --set tenant.pools[0].name="default" \
   --set tenant.buckets[0].name="test" \
   --wait
+
+k port-forward -n minio svc/myminio-console 9443:9443
+
+- Access Key: `minio`
+- Secret Key: `minio123`
+- Endpoint: `https://localhost:9443`
