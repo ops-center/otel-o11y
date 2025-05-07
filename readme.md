@@ -111,12 +111,15 @@ kubectl create namespace thanos
 #### Deploy Thanos
 
 ```bash
-kubectl -n monitoring create secret generic thanos-objstore-config --from-file=objstore.yml=./thanos/s3.yaml
+kubectl -n thanos create secret generic thanos-objstore-config \
+  --from-file=objstore.yml=./thanos/s3.yaml
 ```
 
 ```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install thanos bitnami/thanos --namespace monitoring --values=./thanos/values.yaml
+helm upgrade -i thanos oci://registry-1.docker.io/bitnamicharts/thanos \
+  --version 16.0.4 \
+  --namespace thanos --create-namespace \
+  --values=./thanos/values.yaml
 ```
 
 #### Query metrics via Thanos Querier

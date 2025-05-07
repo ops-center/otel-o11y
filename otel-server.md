@@ -33,3 +33,32 @@ k port-forward -n minio svc/myminio-console 9443:9443
 - Access Key: `minio`
 - Secret Key: `minio123`
 - Endpoint: `https://localhost:9443`
+
+
+helm upgrade -i opentelemetry-kube-stack opentelemetry-kube-stack \
+--repo https://open-telemetry.github.io/opentelemetry-helm-charts \
+-n monitoring --create-namespace \
+--version 0.5.2
+
+
+### Deploy Thanos
+
+#### Create Namespace
+
+```bash
+kubectl create namespace thanos
+```
+
+#### Deploy Thanos
+
+```bash
+kubectl -n thanos create secret generic thanos-objstore-config \
+  --from-file=objstore.yml=./thanos/s3.yaml
+```
+
+```bash
+helm upgrade -i thanos oci://registry-1.docker.io/bitnamicharts/thanos \
+  --version 16.0.4 \
+  --namespace thanos --create-namespace \
+  --values=./thanos/values.yaml
+```
