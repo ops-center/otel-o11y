@@ -1,0 +1,4 @@
+k create -f https://raw.githubusercontent.com/appscode-cloud/installer/refs/heads/master/charts/license-proxyserver/crds/monitoring.coreos.com_servicemonitors.yaml
+
+k create -f https://raw.githubusercontent.com/ops-center/alerts/refs/heads/master/charts/cassandra-alerts/crds/monitoring.coreos.com_prometheusrules.yaml
+
