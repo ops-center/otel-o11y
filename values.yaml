@@ -76,11 +76,11 @@ collectors:
               endpoint: 0.0.0.0:4318
       exporters:
         prometheusremotewrite:
-          endpoint: "http://thanos-receive.monitoring.svc.cluster.local:19291/api/v1/receive"
+          endpoint: "http://thanos-receive-router-thanos-receive-td-1.thanos-operator-system.svc.cluster.local:19291/api/v1/receive"
         clickhouse:
           endpoint: "tcp://ch:9000"
-          username: ${CLICKHOUSE_USERNAME}
-          password: ${CLICKHOUSE_PASSWORD}
+          username: "admin"
+          password: "dMvJU8fypUSzxb1K"
           database: "default"
           create_schema: false
           logs_table_name: otel_logs
@@ -96,7 +96,7 @@ collectors:
         pipelines:
           metrics:
             receivers: [otlp]
-            exporters: [prometheusremotewrite]
+            exporters: [prometheusremotewrite,debug]
           traces: null
           logs:
             receivers: [otlp,k8sobjects]
